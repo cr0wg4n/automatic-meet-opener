@@ -2,9 +2,13 @@ from datetime import datetime, timezone
 from auth import get_service
 from dateutil.parser import parse
 from dateutil.tz import gettz
+from multiprocessing import Process
 import time
 import sched
+import webbrowser
 
+UPDATE_TIME = 120 # minutes
+MINUTES_BEFORE = 2
 EMAIL = ['example@gmail.com']
 TIMEZONE = 'America/La_Paz'
 
@@ -27,7 +31,6 @@ def update_db():
         db.append(event)
   return db
         
-
 def parse_event(event):
   event_object = {}
   if 'hangoutLink' in event.keys():
@@ -38,26 +41,36 @@ def parse_event(event):
       event_object['start'] = parse(event['start']['dateTime']).timestamp()
   return event_object
 
-def launch_alert (event):
-  print(event)
+def alert (event):
+  print('Openning browser...', datetime.now())
+  webbrowser.open(event['hangoutLink'], new=2)
+  print('Meeting: {}'.format(event['summary']))
+
+def launch_scheduler(events):
+  for event in events:
+    event = parse_event(event)
+    if(event['start'] > time.time()):
+      scheduler.enterabs((event['start'] - (MINUTES_BEFORE * 60)), 1, alert, (event,))
+      print('{}, active event :D'.format(event['summary']))
+    else:
+      print('{}, past event :|'.format(event['summary']))
+  print('launching schedulers...')
+  scheduler.run()
+
+def kill_jobs(jobs):
+  for job in jobs:
+    job.terminate()
+    job.join()
 
 if __name__ == "__main__":
   while True:
+    jobs = []
     db = update_db()
-    for event in db:
-      event = parse_event(event)
-      scheduler.enterabs(event['start'], 1, launch_alert, (event,))
-    scheduler.run()
-    print('end')
-    time.sleep(10000)
-
-
-# print(time.time())
-# now = time.time()
-# event_time = parse('2020-09-10T23:40:00-04:00').timestamp()
-# scheduler.enterabs(event_time+2, 1, test, ('hi 3',))
-# scheduler.enterabs(event_time+1, 1, test, ('hi 1',))
-# scheduler.enterabs(event_time+10, 1, test, ('hi 2',))
-# scheduler.run()
-# print(time.time())
-# print('finish')
+    print('updating data...')
+    kill_jobs(jobs)
+    if len(db) > 0:
+      print('{} events found!'.format(len(db)))
+      process = Process(target=launch_scheduler, args=(db,))
+      jobs.append(process)
+      process.start()
+    time.sleep(UPDATE_TIME * 60)
