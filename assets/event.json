@@ -1,0 +1,69 @@
+[{
+  "kind": "calendar#event",
+  "etag": "1231232442134234",
+  "id": "5vu7ajlh23232323qfdijfrji",
+  "status": "confirmed",
+  "htmlLink": "https://www.google.com/calendar/event?eid=NXZ1XXXXXXXXXXXXXXXXXXXXXXXXXXXXaGNncm91XXXXbw&ctz=America/La_Paz",
+  "created": "2020-09-08T20:52:50.000Z",
+  "updated": "2020-09-10T18:59:57.206Z",
+  "summary": "Demo Meet",
+  "creator": {
+    "email": "example1@gmail.com"
+  },
+  "organizer": {
+    "email": "example1@gmail.com"
+  },
+  "start": {
+    "dateTime": "2020-09-10T16:00:00-04:00"
+  },
+  "end": {
+    "dateTime": "2020-09-10T17:00:00-04:00"
+  },
+  "iCalUID": "5vu7ajlh23232323qfdijfrji@google.com",
+  "sequence": 0,
+  "attendees": [{
+    "email": "example1@gmail.com",
+    "responseStatus": "needsAction"
+  }, {
+    "email": "example2@gmail.com",
+    "responseStatus": "accepted"
+  }, {
+    "email": "example3@gmail.com",
+    "self": true,
+    "responseStatus": "accepted"
+  }, {
+    "email": "example4@gmail.com",
+    "organizer": true,
+    "responseStatus": "accepted"
+  }],
+  "hangoutLink": "https://meet.google.com/xxx-xxxx-xxx",
+  "conferenceData": {
+    "entryPoints": [{
+      "entryPointType": "video",
+      "uri": "https://meet.google.com/xxx-xxxx-xxx",
+      "label": "meet.google.com/xxx-xxxx-xxx"
+    }, {
+      "entryPointType": "more",
+      "uri": "https://tel.meet/xxx-xxxx-xxx?pin=9432302323960904",
+      "pin": "9432302323960904"
+    }, {
+      "regionCode": "US",
+      "entryPointType": "phone",
+      "uri": "tel:+1-123-34-4544",
+      "label": "+1 123-667-4545",
+      "pin": "9432302323960904"
+    }],
+    "conferenceSolution": {
+      "key": {
+        "type": "hangoutsMeet"
+      },
+      "name": "Google Meet",
+      "iconUri": "https://lh5.googleusercontent.com/proxy/bWvYBOb7O03a7HK5iKNEAPoUNPEASDASDASDQW43V234Dg6T2unnsHx7RSkC123QJm_ZEvZUASDASDQ23BGr_tDlF8Z_rSzX123g3M46v"
+    },
+    "conferenceId": "xxx-xxxx-xxx",
+    "signature": "VDS/mfN12323+SD2+wCe/123D"
+  },
+  "reminders": {
+    "useDefault": true
+  }
+}]
