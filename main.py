@@ -7,7 +7,7 @@ import time
 import sched
 import webbrowser
 
-UPDATE_TIME = 120 # minutes
+UPDATE_TIME = 117 # minutes
 MINUTES_BEFORE = 2
 EMAIL = ['example@gmail.com']
 TIMEZONE = 'America/La_Paz'
